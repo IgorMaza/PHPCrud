@@ -1,6 +1,23 @@
 <?php
 include 'usuarios_controller.php';
 
+session_start();
+
+if (!isset($_SESSION['email'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$nome = $_SESSION['nome'];
+$email = $_SESSION['email'];
+
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
+    exit();
+}
+
 //Pega todos os usuários para preencher os dados da tabela
 $users = getUsers();
 
@@ -18,30 +35,44 @@ if (isset($_GET['edit'])) {
 
     <script src="js/main.jss"></script>
 
-    <h2>Cadastro de Usuários</h2>
+    <h2 style="text-align:center;">Cadastro de Usuários</h2>
 
-    <form method="POST" action="">
+    <form method="POST" action="" >
         <input type="hidden" id="id" name="id" value="<?php echo $userToEdit['id'] ?? ''; ?>">
+       
+        <div class="from-group" style="width:600px; margin:auto;" >
+        <label class="mb-0" for="nome" style="text-align: left;">Nome:</label>
+        <input class= "form-control" type="text" id="nome" name="nome" value="<?php echo $userToEdit['nome'] ?? ''; ?>" required><br>
+        </div> 
+
+        <div class="from-group" style="width:600px; margin:auto;">
+        <label class="mb-0" for="telefone">Telefone:</label>
+        <input class= "form-control" type="text" id="telefone" name="telefone" value="<?php echo $userToEdit['telefone'] ?? ''; ?>" required><br>
+        </div>
+
+        <div class="from-group" style="width:600px; margin:auto;">
+        <label class="mb-0" for="email">Email:</label>
+        <input class= "form-control" type="email" id="email" name="email" value="<?php echo $userToEdit['email'] ?? ''; ?>" required><br>
+        </div>
+
+        <div class="from-group" style="width:600px; margin:auto;">
+        <label class="mb-0" for="senha">Senha:</label>
+        <input class= "form-control" type="password" id="senha" name="senha" required><br>
+        </div>
+
+        <div style="text-align: center;">
+        <button type="submit" class="btn btn-primary" name="save" style="padding: 10px 25px;">Salvar</button>
+        <button type="submit" class="btn btn-primary" name="update" style="padding: 10px 25px;">Atualizar</button>
+        <button type="button" class="btn btn-primary" onclick="clearForm()" style="padding: 10px 25px;">Novo</button>
+        </div>
         
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" value="<?php echo $userToEdit['nome'] ?? ''; ?>" required><br><br>
-        
-        <label for="telefone">Telefone:</label>
-        <input type="text" id="telefone" name="telefone" value="<?php echo $userToEdit['telefone'] ?? ''; ?>" required><br><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="<?php echo $userToEdit['email'] ?? ''; ?>" required><br><br>
-        
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required><br><br>
-        
-        <button type="submit" class="btn btn-success" name="save">Salvar</button>
-        <button type="submit" class="btn btn-success" name="update">Atualizar</button>
-        <button type="button" class="btn btn-success" onclick="clearForm()">Novo</button>
+        <br>
+        <br>
+    
     </form>
 
-    <h2>Usuários Cadastrados</h2>
-    <table border="1" class="table table-dark">
+    <h2 style="text-align:center;">Usuários Cadastrados</h2>
+    <table border="1" class="table table-dark table-striped">
         <tr>
             <th>ID</th>
             <th>Nome</th>
@@ -57,8 +88,8 @@ if (isset($_GET['edit'])) {
                 <td><?php echo $user['telefone']; ?></td>
                 <td><?php echo $user['email']; ?></td>
                 <td>
-                    <a href="?edit=<?php echo $user['id']; ?>">Editar</a>
-                    <a href="?delete=<?php echo $user['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                    <a class="btn btn-primary" href="?edit=<?php echo $user['id']; ?>">Editar</a>
+                    <a class="btn btn-danger" href="?delete=<?php echo $user['id']; ?>" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
                 </td>
             </tr>
         <?php endforeach; ?>
