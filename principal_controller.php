@@ -1,4 +1,5 @@
 <?php
+include 'db.php';
 //Prepara pa gerenciar a sessão
 session_start();
 
@@ -11,6 +12,12 @@ if (!isset($_SESSION['email'])) {
 // Armazena informações do usuário
 $nome = $_SESSION['nome'];
 $email = $_SESSION['email'];
+
+function getProds() {
+    global $conn;
+    $result = $conn->query("SELECT * FROM produtos");
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 
 // Função para lidar com o logout
 if (isset($_POST['logout'])) {
