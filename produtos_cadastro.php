@@ -72,7 +72,7 @@ if (isset($_GET['edit'])) {
 
         <div class="from-group" style="width:600px; margin:auto;">
         <label class="mb-0" for="url_img">Url Img:</label>
-        <input class= "form-control" type="img" id="url_img" name="url_img" value="<?php echo $prodToEdit['url_img'] ?? ''; ?>" required><br>
+        <input class= "form-control" type="text" id="url_img" name="url_img" value="<?php echo $prodToEdit['url_img'] ?? ''; ?>" required><br>
         </div>
 
         <div class="from-group" style="width:600px; margin:auto;">
@@ -114,7 +114,7 @@ if (isset($_GET['edit'])) {
                 <td><?php echo $prod['modelo']; ?></td>
                 <td><?php echo $prod['valorunitario']; ?></td>
                 <td><?php echo $prod['categoria']; ?></td>
-                <td><?php echo $prod['url_img']; ?></td>
+                <td><img src="<?php echo $prod['url_img']; ?>" alt="Imagem do Produto"style="width: 100px"></td>
                 <td><?php echo $prod['ativo']; ?></td>
                 <td>
                     <a class="btn btn-primary" href="?edit=<?php echo $prod['id']; ?>">Editar</a>

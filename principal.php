@@ -21,7 +21,7 @@ $prods = getProds();
     <?php foreach ($prods as $prod): ?>
 
     <div class="card" style="width: 18rem;">
-    <img src="<?php echo $prod['url_img']; ?>" class="rounded mx-auto d-block" alt="Imagem do Produto">
+    <img src="<?php echo $prod['url_img']; ?>" class="rounded mx-auto d-block" alt="Imagem do Produto" style="width: 100px">
     <div class="card-body">
     <h5 class="card-title"><?php echo $prod['nome']; ?></h5>
     <p class="card-text"><?php echo $prod['descricao']; ?></p>
