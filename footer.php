@@ -1,7 +1,7 @@
 <footer class="bg-dark text-white d-flex align-items-center" style="height: 1cm;">
 
     <div class="container text-center">
-            <p class="mb-0">Olá, <?php echo htmlspecialchars($nome); ?>!</p>
+            <p class="mb-0">Olá, <?php echo htmlspecialchars($_SESSION['nome']); ?>!</p>
         </div>
         
         <div class="container text-center">
